@@ -28,15 +28,12 @@ export function clampWindowPosition(
 export function getMaximizedWindowRect(viewport: ViewportBounds) {
   return {
     position: {
-      x: viewport.padding,
-      y: viewport.padding + viewport.taskbarHeight,
+      x: 0,
+      y: 0,
     },
     size: {
-      width: Math.max(320, viewport.width - viewport.padding * 2),
-      height: Math.max(
-        240,
-        viewport.height - viewport.padding * 2 - viewport.taskbarHeight
-      ),
+      width: Math.max(320, viewport.width),
+      height: Math.max(240, viewport.height),
     },
   };
 }

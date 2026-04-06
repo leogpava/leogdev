@@ -1,5 +1,6 @@
 "use client";
 
+import { appRegistry } from "@/apps/registry";
 import { useIsMobile } from "@/shared/hooks/use-is-mobile";
 
 import { useWindowManager } from "../store/use-window-manager";
@@ -8,12 +9,20 @@ import { WindowTaskbar } from "./window-taskbar";
 
 export function WindowLayer() {
   const windows = useWindowManager((state) => state.windows);
+  const activeWindowId = useWindowManager((state) => state.activeWindowId);
   const isMobile = useIsMobile();
 
   const renderedWindows = windows
     .filter((window) => window.isOpen)
     .slice()
     .sort((left, right) => left.zIndex - right.zIndex);
+  const activeWindow = renderedWindows.find((window) => window.id === activeWindowId) ?? null;
+  const shouldHideTaskbar = Boolean(
+    activeWindow &&
+      !activeWindow.isMinimized &&
+      (activeWindow.isMaximized ||
+        (isMobile && appRegistry[activeWindow.appId]?.mobileMode === "fullscreen"))
+  );
 
   return (
     <div className="pointer-events-none absolute inset-0 z-20">
@@ -22,7 +31,7 @@ export function WindowLayer() {
           <WindowFrame window={window} isMobile={isMobile} />
         </div>
       ))}
-      <WindowTaskbar isMobile={isMobile} />
+      {!shouldHideTaskbar ? <WindowTaskbar isMobile={isMobile} /> : null}
     </div>
   );
 }

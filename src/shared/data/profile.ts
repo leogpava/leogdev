@@ -2,9 +2,9 @@ export const profile = {
   name: "Leonardo Pavanelli",
   title: "Consultor SAP Integration",
   summary:
-    "Foco em integracoes enterprise e arquitetura, com experiencia pratica em ambientes criticos e evolucao tecnica acelerada.",
+    "Foco em integrações enterprise e arquitetura, com experiência prática em ambientes críticos e evolução técnica acelerada.",
   about:
-    "Transito entre produto, experiencia e engenharia com base forte em integracoes SAP e capacidade de transformar requisitos complexos em estruturas claras, operaveis e escalaveis.",
+    "Trânsito entre produto, experiência e engenharia, com base sólida em integrações SAP e capacidade de transformar requisitos complexos em estruturas claras, operáveis e escaláveis.",
 };
 
 export const contactLinks = [

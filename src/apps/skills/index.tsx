@@ -8,12 +8,12 @@ export function SkillsApp({ window }: AppComponentProps) {
         <div className="mx-auto flex max-w-5xl flex-col gap-7">
           <header className="max-w-3xl">
             <p className="text-xs uppercase tracking-[0.34em] text-emerald-300/80">
-              Capability Map
+              Mapa de competências
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-white">{window.title}</h2>
             <p className="mt-4 text-sm leading-8 text-slate-200/80">
-              Competencias organizadas por dominio para mostrar profundidade tecnica,
-              repertorio de integracao e ferramental de apoio.
+              Competências organizadas por domínio para mostrar profundidade técnica,
+              repertório em integração e ferramental de apoio.
             </p>
           </header>
 

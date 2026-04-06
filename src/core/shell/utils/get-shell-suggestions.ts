@@ -2,7 +2,7 @@ import { appDefinitions } from "@/apps/registry";
 import { commandRegistry } from "@/core/shell/commands/command-registry";
 import { tokenizeInput } from "@/core/shell/parser/tokenize-input";
 
-import { getOpenSuggestions } from "./open-navigation";
+import { getOpenSuggestions } from "./open-navigation-pt";
 
 const topLevelTargets = Array.from(
   new Set([

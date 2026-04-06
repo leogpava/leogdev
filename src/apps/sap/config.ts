@@ -5,7 +5,7 @@ import { sapAppStyles } from "./styles";
 
 export const sapAppDefinition: AppDefinition = {
   id: "sap",
-  title: "SAP Experience",
+  title: "Experiência SAP",
   component: SapApp,
   defaultSize: {
     width: 780,

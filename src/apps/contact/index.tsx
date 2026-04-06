@@ -26,11 +26,11 @@ export function ContactApp({ window }: AppComponentProps) {
         <div className="mx-auto flex max-w-3xl flex-col gap-6">
           <header className="max-w-2xl">
             <p className="text-xs uppercase tracking-[0.34em] text-cyan-300/80">
-              Reach Out
+              Contato
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-white">{window.title}</h2>
             <p className="mt-4 text-sm leading-8 text-slate-200/80">
-              Canais diretos para conversa profissional, networking e acesso ao codigo.
+              Canais diretos para conversa profissional, networking e acesso ao código.
             </p>
           </header>
 

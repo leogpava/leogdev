@@ -8,7 +8,7 @@ export function AboutApp({ window }: AppComponentProps) {
         <div className="mx-auto flex max-w-4xl flex-col gap-6">
           <header className="max-w-3xl">
             <p className="text-xs uppercase tracking-[0.35em] text-amber-300/75">
-              Professional Profile
+              Perfil profissional
             </p>
             <h2 className="mt-3 text-3xl font-semibold">{profile.name}</h2>
             <p className="mt-2 text-lg text-amber-100/90">{profile.title}</p>
@@ -23,7 +23,7 @@ export function AboutApp({ window }: AppComponentProps) {
 
           <article className="rounded-[28px] border border-white/10 bg-black/20 p-5">
             <p className="text-xs uppercase tracking-[0.28em] text-amber-200/75">
-              Narrative
+              Trajetória
             </p>
             <p className="mt-4 text-sm leading-8 text-amber-50/82">{profile.about}</p>
           </article>

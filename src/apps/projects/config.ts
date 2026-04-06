@@ -4,7 +4,7 @@ import { ProjectsApp } from "./index";
 
 export const projectsAppDefinition: AppDefinition = {
   id: "projects",
-  title: "Projects",
+  title: "Projetos",
   component: ProjectsApp,
   defaultSize: {
     width: 820,

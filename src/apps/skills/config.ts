@@ -4,7 +4,7 @@ import { SkillsApp } from "./index";
 
 export const skillsAppDefinition: AppDefinition = {
   id: "skills",
-  title: "Skills",
+  title: "Competências",
   component: SkillsApp,
   defaultSize: {
     width: 760,

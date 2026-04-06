@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 
@@ -13,21 +13,45 @@ import {
 } from "@/shared/data/sap";
 import type { AppComponentProps } from "@/shared/types/app";
 
+function SapPageHeader({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <section className="sap-page-header">
+      <div className="sap-page-header__top">
+        <div>
+          <p className="sap-page-header__eyebrow">Aplicacao SAP</p>
+          <h1 className="sap-page-header__title">{title}</h1>
+          <p className="sap-page-header__description">{description}</p>
+        </div>
+        <div className="sap-page-header__actions">
+          <button type="button" className="sap-inline-button">
+            Compartilhar
+          </button>
+          <button type="button" className="sap-inline-button sap-inline-button--primary">
+            Exportar perfil
+          </button>
+        </div>
+      </div>
+      <div className="sap-page-header__meta">
+        <span className="sap-object-status sap-object-status--success">
+          <span className="sap-object-status__dot" aria-hidden="true" />
+          Sessao ativa
+        </span>
+        <span className="sap-pill">Integration Suite</span>
+        <span className="sap-pill">Arquitetura enterprise</span>
+      </div>
+    </section>
+  );
+}
+
 function SapOverviewSection() {
   return (
     <>
-      <section className="sap-banner">
-        <div>
-          <p className="sap-banner__eyebrow">Professional Overview</p>
-          <h3 className="sap-banner__title">{sapOverview.role}</h3>
-          <p className="sap-banner__text">{sapOverview.summary}</p>
-        </div>
-        <div className="sap-banner__status">
-          <span className="sap-banner__status-dot" aria-hidden="true" />
-          Enterprise integration focus
-        </div>
-      </section>
-
       <section className="sap-kpis" aria-label="Indicadores principais">
         {sapOverview.metrics.map((metric) => (
           <article key={metric.label} className="sap-kpi">
@@ -38,13 +62,52 @@ function SapOverviewSection() {
         ))}
       </section>
 
-      <section className="sap-card sap-card--full">
+      <section className="sap-section-grid sap-section-grid--two">
+        <article className="sap-card">
+          <div className="sap-card__header">
+            <div>
+              <p className="sap-card__eyebrow">Resumo profissional</p>
+              <h3 className="sap-card__title">{sapOverview.role}</h3>
+            </div>
+            <span className="sap-object-status sap-object-status--success">
+              <span className="sap-object-status__dot" aria-hidden="true" />
+              Ativo em integracoes SAP
+            </span>
+          </div>
+          <p className="sap-card__text">{sapOverview.summary}</p>
+        </article>
+
+        <article className="sap-card">
+          <div className="sap-card__header">
+            <div>
+              <p className="sap-card__eyebrow">Escopo atual</p>
+              <h3 className="sap-card__title">Areas de atuacao</h3>
+            </div>
+          </div>
+          <div className="sap-list">
+            <div className="sap-list__item sap-list__item--compact">
+              <p className="sap-list__title">Integracao enterprise</p>
+              <p className="sap-list__meta">CPI, APIs, observabilidade e sustentacao</p>
+            </div>
+            <div className="sap-list__item sap-list__item--compact">
+              <p className="sap-list__title">Arquitetura e contratos</p>
+              <p className="sap-list__meta">Validacao tecnica e consistencia de payloads</p>
+            </div>
+            <div className="sap-list__item sap-list__item--compact">
+              <p className="sap-list__title">Operacao critica</p>
+              <p className="sap-list__meta">Resiliencia, erros controlados e continuidade</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section className="sap-card">
         <div className="sap-card__header">
           <div>
             <p className="sap-card__eyebrow">Atuacao</p>
             <h3 className="sap-card__title">Como eu gero valor</h3>
           </div>
-          <span className="sap-pill sap-pill--success">Ambientes criticos</span>
+          <span className="sap-pill">Ambientes criticos</span>
         </div>
         <div className="sap-bullet-list">
           {sapOverview.bullets.map((bullet) => (
@@ -61,17 +124,19 @@ function SapOverviewSection() {
 
 function SapExperienceSection() {
   return (
-    <section className="sap-card sap-card--full">
+    <section className="sap-card">
       <div className="sap-card__header">
         <div>
-          <p className="sap-card__eyebrow">Experience</p>
+          <p className="sap-card__eyebrow">Experiencia</p>
           <h3 className="sap-card__title">{sapExperience.company}</h3>
         </div>
         <span className="sap-pill">{sapExperience.period}</span>
       </div>
 
       <div className="sap-timeline">
-        <div className="sap-timeline__point" aria-hidden="true" />
+        <div className="sap-timeline__line">
+          <div className="sap-timeline__point" aria-hidden="true" />
+        </div>
         <div className="sap-timeline__content">
           <p className="sap-timeline__role">{sapExperience.title}</p>
           <div className="sap-bullet-list">
@@ -112,7 +177,7 @@ function SapProjectsSectionContent({
           <p className="sap-card__text">{project.summary}</p>
           <div className="sap-list">
             {project.highlights.map((highlight) => (
-              <div key={highlight} className="sap-list__item">
+              <div key={highlight} className="sap-list__item sap-list__item--compact">
                 <p className="sap-list__title">{highlight}</p>
               </div>
             ))}
@@ -137,7 +202,7 @@ function SapProjectDetail({
   }
 
   return (
-    <section className="sap-card sap-card--full">
+    <section className="sap-card">
       <div className="sap-card__header">
         <div>
           <p className="sap-card__eyebrow">Projeto enterprise</p>
@@ -169,7 +234,7 @@ function SapStackSection() {
         <article key={group.category} className="sap-card">
           <div className="sap-card__header">
             <div>
-              <p className="sap-card__eyebrow">Stack SAP</p>
+              <p className="sap-card__eyebrow">Tecnologias SAP</p>
               <h3 className="sap-card__title">{group.category}</h3>
             </div>
           </div>
@@ -208,7 +273,9 @@ export function SapApp({ window }: AppComponentProps) {
   const [activeSection, setActiveSection] = useState<SapSectionId>("overview");
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const requestedSection =
-    typeof window.props?.initialSection === "string" ? (window.props.initialSection as SapSectionId) : null;
+    typeof window.props?.initialSection === "string"
+      ? (window.props.initialSection as SapSectionId)
+      : null;
   const requestedProjectId =
     typeof window.props?.projectId === "string" ? window.props.projectId : null;
 
@@ -222,31 +289,47 @@ export function SapApp({ window }: AppComponentProps) {
     setSelectedProjectId(requestedProjectId);
   }, [requestedProjectId]);
 
+  const activeSectionLabel =
+    sapSections.find((item) => item.id === activeSection)?.label ?? "Visao geral";
+
   return (
     <section className="sap-app">
       <div className="sap-shell">
         <header className="sap-shellbar">
-          <div className="sap-shellbar__title">
-            <p className="sap-shellbar__eyebrow">SAP Professional Experience</p>
-            <h2 className="sap-shellbar__heading">{window.title}</h2>
-            <p className="sap-shellbar__meta">
-              Experiencia profissional em integracoes SAP, arquitetura enterprise e operacao critica.
-            </p>
+          <div className="sap-shellbar__brand">
+            <button type="button" className="sap-shellbar__menu" aria-label="Abrir menu">
+              =
+            </button>
+            <span className="sap-shellbar__logo" aria-hidden="true">
+              SAP
+            </span>
+            <div className="sap-shellbar__titles">
+              <p className="sap-shellbar__product">{window.title}</p>
+              <p className="sap-shellbar__meta">Fiori launchpad · perfil profissional SAP</p>
+            </div>
           </div>
           <div className="sap-shellbar__actions" aria-label="Acoes da aplicacao">
-            <span className="sap-icon-button" aria-hidden="true">BTP</span>
-            <span className="sap-icon-button" aria-hidden="true">CPI</span>
-            <span className="sap-icon-button" aria-hidden="true">API</span>
-            <span className="sap-user-pill">
-              <span className="sap-user-pill__avatar" aria-hidden="true">LP</span>
-              Leonardo Pavanelli
-            </span>
+            <button type="button" className="sap-toolbar-button" aria-label="Buscar">
+              Busca
+            </button>
+            <button type="button" className="sap-toolbar-button" aria-label="Notificacoes">
+              Alertas
+            </button>
+            <button type="button" className="sap-toolbar-button" aria-label="Ajuda">
+              Ajuda
+            </button>
+            <button type="button" className="sap-avatar-button" aria-label="Perfil do usuario">
+              <span className="sap-avatar-button__circle" aria-hidden="true">
+                LP
+              </span>
+              <span className="sap-avatar-button__name">Leonardo Pavanelli</span>
+            </button>
           </div>
         </header>
 
         <div className="sap-body">
           <aside className="sap-sidebar" aria-label="Navegacao SAP">
-            <p className="sap-sidebar__label">Navegacao interna</p>
+            <p className="sap-sidebar__label">Navegacao</p>
             <nav className="sap-nav">
               {sapSections.map((item) => (
                 <button
@@ -268,6 +351,11 @@ export function SapApp({ window }: AppComponentProps) {
           </aside>
 
           <main className="sap-content">
+            <SapPageHeader
+              title={activeSectionLabel}
+              description="Experiencia profissional em integracoes SAP, arquitetura enterprise e operacao critica dentro de uma superficie visual alinhada ao Fiori."
+            />
+
             {activeSection === "overview" && <SapOverviewSection />}
             {activeSection === "experience" && <SapExperienceSection />}
             {activeSection === "projects" &&

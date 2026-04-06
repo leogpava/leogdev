@@ -67,7 +67,7 @@ export function ProjectsApp({ window }: AppComponentProps) {
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.34em] text-cyan-300/75">
-                  Personal Projects
+                  Projetos pessoais
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold text-white">
                   {selectedProject.title}
@@ -106,7 +106,7 @@ export function ProjectsApp({ window }: AppComponentProps) {
             <div className="grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
               <article className="rounded-[28px] border border-white/10 bg-white/[0.05] p-5 transition-colors duration-200 hover:border-white/14">
                 <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/75">
-                  Highlights
+                  Destaques
                 </p>
                 <div className="mt-4 grid gap-3">
                   {selectedProject.highlights.map((highlight) => (
@@ -121,7 +121,7 @@ export function ProjectsApp({ window }: AppComponentProps) {
               </article>
 
               <article className="rounded-[28px] border border-white/10 bg-white/[0.05] p-5 transition-colors duration-200 hover:border-white/14">
-                <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/75">Stack</p>
+                <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/75">Tecnologias</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {selectedProject.stack.map((item) => (
                     <span
@@ -139,13 +139,13 @@ export function ProjectsApp({ window }: AppComponentProps) {
           <div className="mx-auto flex max-w-5xl flex-col gap-8">
             <header className="max-w-3xl">
               <p className="text-xs uppercase tracking-[0.34em] text-cyan-300/75">
-                Personal Projects
+                Projetos pessoais
               </p>
               <h2 className="mt-3 text-3xl font-semibold text-white">{window.title}</h2>
               <p className="mt-4 text-sm leading-8 text-slate-200/82">
-                Espaco dedicado aos projetos pessoais, separados da experiencia SAP.
-                Aqui a narrativa foca em produto, UX, exploracao tecnica e execucao
-                full-stack aplicada a ideias autorais.
+                Espaço dedicado aos projetos pessoais, separado da experiência SAP.
+                Aqui a narrativa foca em produto, UX, exploração técnica e execução
+                full stack aplicada a ideias autorais.
               </p>
             </header>
 

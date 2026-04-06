@@ -1,6 +1,6 @@
 export const skillGroups = [
   {
-    category: "Integracao",
+    category: "Integração",
     items: ["SAP CPI", "API Management", "Event Mesh"],
   },
   {
@@ -17,6 +17,6 @@ export const skillGroups = [
   },
   {
     category: "Outros",
-    items: ["Prompt Engineering", "Automacao"],
+    items: ["Prompt Engineering", "Automação"],
   },
 ];

@@ -1,7 +1,7 @@
 import { appDefinitions } from "@/apps/registry";
 import { SHELL_VIRTUAL_PATH } from "@/core/shell/constants/prompt";
 import type { CommandHandler } from "@/core/shell/types/terminal";
-import { resolveOpenCommand } from "@/core/shell/utils/open-navigation";
+import { resolveOpenCommand } from "@/core/shell/utils/open-navigation-pt";
 import { formatShellDate } from "@/core/shell/utils/format-shell-date";
 import type { AppId } from "@/shared/types/app";
 
@@ -18,13 +18,13 @@ const formatAppList = () =>
 
 const helpCommand: CommandHandler = {
   name: "help",
-  description: "Lista os comandos disponiveis.",
+  description: "Lista os comandos disponíveis.",
   usage: "help",
   execute: () => ({
     entries: [
       {
         type: "info",
-        content: "Available commands",
+        content: "Comandos disponíveis",
       },
       {
         type: "output",
@@ -36,7 +36,7 @@ const helpCommand: CommandHandler = {
 
 const clearCommand: CommandHandler = {
   name: "clear",
-  description: "Limpa o historico visivel do terminal.",
+  description: "Limpa o histórico visível do terminal.",
   usage: "clear",
   aliases: ["cls"],
   execute: () => ({
@@ -46,13 +46,13 @@ const clearCommand: CommandHandler = {
 
 const listCommand: CommandHandler = {
   name: "ls",
-  description: "Lista os modulos disponiveis no sistema.",
+  description: "Lista os módulos disponíveis no sistema.",
   usage: "ls",
   execute: () => ({
     entries: [
       {
         type: "info",
-        content: "Available modules",
+        content: "Módulos disponíveis",
       },
       {
         type: "output",
@@ -64,7 +64,7 @@ const listCommand: CommandHandler = {
 
 const openCommand: CommandHandler = {
   name: "open",
-  description: "Abre uma aplicacao em uma janela flutuante.",
+  description: "Abre uma aplicação em uma janela flutuante.",
   usage: "open <app> [target]",
   execute: (args, context) => {
     const resolution = resolveOpenCommand(args);
@@ -87,7 +87,7 @@ const openCommand: CommandHandler = {
         entries: [
           {
             type: "error",
-            content: `app not found: ${resolution.appId}\nUse "ls" para ver as opcoes.`,
+            content: `Aplicação não encontrada: ${resolution.appId}\nUse "ls" para ver as opções.`,
           },
         ],
       };
@@ -117,14 +117,14 @@ const openCommand: CommandHandler = {
 
 const whoAmICommand: CommandHandler = {
   name: "whoami",
-  description: "Mostra uma breve apresentacao profissional.",
+  description: "Mostra uma breve apresentação profissional.",
   usage: "whoami",
   execute: () => ({
     entries: [
       {
         type: "output",
         content:
-          "Leonardo Pavanelli\nConsultor SAP Integration com foco em integracoes enterprise, arquitetura e interfaces criticas.",
+          "Leonardo Pavanelli\nConsultor SAP Integration com foco em integrações enterprise, arquitetura e interfaces críticas.",
       },
     ],
   }),

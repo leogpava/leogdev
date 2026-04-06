@@ -101,15 +101,6 @@ function ShadowAppContainer({ styleText, children }: ShadowAppContainerProps) {
     styleElement.textContent = [BASE_SHADOW_STYLES, styleText].filter(Boolean).join("\n");
   }, [shadowRoot, styleText]);
 
-  useEffect(
-    () => () => {
-      if (portalRoot) {
-        portalRoot.replaceChildren();
-      }
-    },
-    [portalRoot]
-  );
-
   return (
     <div ref={hostRef} className="h-full w-full overflow-hidden">
       {portalRoot ? createPortal(children, portalRoot) : null}

@@ -4,7 +4,7 @@ import { ContactApp } from "./index";
 
 export const contactAppDefinition: AppDefinition = {
   id: "contact",
-  title: "Contact",
+  title: "Contato",
   component: ContactApp,
   defaultSize: {
     width: 620,

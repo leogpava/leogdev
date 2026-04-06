@@ -14,39 +14,39 @@ export type SapProject = {
 };
 
 export const sapSections: { id: SapSectionId; label: string; badge: string }[] = [
-  { id: "overview", label: "Overview", badge: "01" },
-  { id: "experience", label: "Experiencia", badge: "02" },
+  { id: "overview", label: "Visão geral", badge: "01" },
+  { id: "experience", label: "Experiência", badge: "02" },
   { id: "projects", label: "Projetos", badge: "03" },
-  { id: "stack", label: "Stack", badge: "04" },
+  { id: "stack", label: "Tecnologias", badge: "04" },
   { id: "architecture", label: "Arquitetura", badge: "05" },
 ];
 
 export const sapOverview = {
   role: "Consultor SAP Integration Suite (CPI)",
   summary:
-    "Atuacao em integracoes criticas entre ERP SAP e sistemas externos, participando de definicoes tecnicas, validacao de especificacoes e sustentacao de ambientes produtivos de alta criticidade.",
+    "Atuação em integrações críticas entre ERP SAP e sistemas externos, participando de definições técnicas, validação de especificações e sustentação de ambientes produtivos de alta criticidade.",
   bullets: [
-    "Integracoes entre ERP core SAP e sistemas externos com foco em confiabilidade operacional",
-    "Participacao direta em definicao tecnica e validacao de especificacoes funcionais",
-    "Atuacao em contextos enterprise com alto impacto em operacao, fiscal e dados",
+    "Integrações entre ERP core SAP e sistemas externos com foco em confiabilidade operacional",
+    "Participação direta na definição técnica e na validação de especificações funcionais",
+    "Atuação em contextos enterprise com alto impacto em operação, fiscal e dados",
   ],
   metrics: [
     { label: "Empresa atual", value: "Lab2dev", hint: "2025 - Atual" },
     { label: "Especialidade", value: "SAP CPI", hint: "Integration Suite / BTP" },
-    { label: "Cenarios validados", value: "+15", hint: "Americanas / IBM" },
-    { label: "Foco tecnico", value: "Enterprise", hint: "Resiliencia e observabilidade" },
+    { label: "Cenários validados", value: "+15", hint: "Americanas / IBM" },
+    { label: "Foco técnico", value: "Enterprise", hint: "Resiliência e observabilidade" },
   ],
 };
 
 export const sapExperience = {
   company: "Lab2dev",
   period: "2025 - Atual",
-  title: "Consultor Integracao SAP",
+  title: "Consultor de Integração SAP",
   responsibilities: [
-    "Definicao tecnica de integracoes entre SAP e sistemas externos",
-    "Validacao de especificacoes funcionais e alinhamento com requisitos de negocio",
-    "Atuacao em ambientes produtivos criticos com foco em integridade e continuidade operacional",
-    "Desenho de fluxos de integracao entre ERP core, APIs, servicos e canais externos",
+    "Definição técnica de integrações entre SAP e sistemas externos",
+    "Validação de especificações funcionais e alinhamento com requisitos de negócio",
+    "Atuação em ambientes produtivos críticos com foco em integridade e continuidade operacional",
+    "Desenho de fluxos de integração entre ERP core, APIs, serviços e canais externos",
   ],
 };
 
@@ -54,27 +54,27 @@ export const sapProjects: SapProject[] = [
   {
     id: "americanas-ibm",
     title: "Americanas / IBM",
-    client: "Projeto enterprise de validacao",
+    client: "Projeto enterprise de validação",
     summary:
-      "Atuacao na validacao de cenarios de integracao e revisao tecnica de especificacoes para garantir consistencia funcional e aderencia arquitetural.",
+      "Atuação na validação de cenários de integração e revisão técnica de especificações para garantir consistência funcional e aderência arquitetural.",
     highlights: [
-      "Validacao de +15 cenarios de integracao",
+      "Validação de mais de 15 cenários de integração",
       "Garantia de integridade de dados entre sistemas",
-      "Revisao de especificacoes funcionais (EFS)",
+      "Revisão de especificações funcionais (EFS)",
       "Alinhamento com arquitetura enterprise",
     ],
   },
   {
     id: "assai-atacadista",
-    title: "Assai Atacadista",
-    client: "Implementacao end-to-end em SAP CPI",
+    title: "Assaí Atacadista",
+    client: "Implementação end-to-end em SAP CPI",
     summary:
-      "Desenvolvimento completo de integracoes fiscais com tratamento de excecoes, subprocessos de erro e transformacao de payloads para operacao robusta.",
+      "Desenvolvimento completo de integrações fiscais com tratamento de exceções, subprocessos de erro e transformação de payloads para uma operação robusta.",
     highlights: [
       "Desenvolvimento end-to-end em SAP CPI",
-      "Integracao fiscal complexa",
-      "Tratamento de excecoes e subprocessos de erro",
-      "Transformacao de payloads XML/JSON",
+      "Integração fiscal complexa",
+      "Tratamento de exceções e subprocessos de erro",
+      "Transformação de payloads XML/JSON",
     ],
   },
   {
@@ -82,11 +82,11 @@ export const sapProjects: SapProject[] = [
     title: "Observabilidade (Datadog)",
     client: "Monitoramento proativo de interfaces",
     summary:
-      "Integracao entre SAP CPI e Datadog via API para ampliar visibilidade, antecipar incidentes e acompanhar a saude operacional das interfaces.",
+      "Integração entre SAP CPI e Datadog via API para ampliar a visibilidade, antecipar incidentes e acompanhar a saúde operacional das interfaces.",
     highlights: [
-      "Integracao SAP CPI com Datadog via API",
+      "Integração SAP CPI com Datadog via API",
       "Monitoramento proativo",
-      "Visibilidade da saude das interfaces",
+      "Visibilidade da saúde das interfaces",
     ],
   },
 ];
@@ -101,44 +101,44 @@ export const sapStackGroups: { category: string; items: string[] }[] = [
     items: ["REST", "SOAP", "OData", "JSON", "XML"],
   },
   {
-    category: "Desenvolvimento e transformacao",
+    category: "Desenvolvimento e transformação",
     items: ["Groovy", "XPath", "XSLT"],
   },
   {
-    category: "Conectividade e seguranca",
+    category: "Conectividade e segurança",
     items: ["OAuth2", "SFTP", "HTTPS"],
   },
 ];
 
 export const sapArchitecturePillars = [
   {
-    title: "Contratos de integracao",
+    title: "Contratos de integração",
     description:
-      "Definicao clara de payloads, responsabilidades e combinacoes de interface para evitar ambiguidades entre negocio e tecnologia.",
+      "Definição clara de payloads, responsabilidades e combinações de interface para evitar ambiguidades entre negócio e tecnologia.",
   },
   {
     title: "Mapeamento de payloads",
     description:
-      "Transformacoes XML/JSON orientadas por consistencia semantica, compatibilidade com sistemas legados e rastreabilidade.",
+      "Transformações XML/JSON orientadas por consistência semântica, compatibilidade com sistemas legados e rastreabilidade.",
   },
   {
-    title: "Resiliencia",
+    title: "Resiliência",
     description:
-      "Desenho com reprocessamento, desacoplamento e tratamento de falhas para suportar operacoes criticas.",
+      "Desenho com reprocessamento, desacoplamento e tratamento de falhas para suportar operações críticas.",
   },
   {
     title: "Tratamento de erro",
     description:
-      "Subprocessos dedicados, excecoes controladas e mensagens acionaveis para reduzir tempo de analise.",
+      "Subprocessos dedicados, exceções controladas e mensagens acionáveis para reduzir o tempo de análise.",
   },
   {
-    title: "Governanca",
+    title: "Governança",
     description:
-      "Aderencia a especificacoes, alinhamento com arquitetura enterprise e padronizacao dos fluxos.",
+      "Aderência a especificações, alinhamento com arquitetura enterprise e padronização dos fluxos.",
   },
   {
     title: "Observabilidade",
     description:
-      "Monitoramento proativo com foco em visibilidade de saude, integridade e disponibilidade das interfaces.",
+      "Monitoramento proativo com foco em visibilidade da saúde, integridade e disponibilidade das interfaces.",
   },
 ];

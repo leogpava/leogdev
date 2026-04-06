@@ -4,7 +4,7 @@ import { AboutApp } from "./index";
 
 export const aboutAppDefinition: AppDefinition = {
   id: "about",
-  title: "About",
+  title: "Sobre",
   component: AboutApp,
   defaultSize: {
     width: 640,

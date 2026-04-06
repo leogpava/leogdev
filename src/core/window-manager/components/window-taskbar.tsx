@@ -104,7 +104,7 @@ export function WindowTaskbar({ isMobile }: WindowTaskbarProps) {
               ))
           ) : (
             <div className="flex items-center px-2 text-[11px] uppercase tracking-[0.24em] text-slate-500">
-              No windows open
+              Nenhuma janela aberta
             </div>
           )}
         </div>

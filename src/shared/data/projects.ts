@@ -13,13 +13,13 @@ export const personalProjects: Project[] = [
     id: "flowmetrics",
     title: "FlowMetrics",
     description:
-      "Webapp de analise de saude com coleta de dados fisicos e geracao de relatorios inteligentes com IA.",
+      "Aplicação web de análise de saúde com coleta de dados físicos e geração de relatórios inteligentes com IA.",
     stack: ["React", "IA", "Web App", "UX"],
     role: "Full-stack / UX / Produto",
-    architecture: "Coleta de dados -> processamento -> geracao de score -> feedback visual",
+    architecture: "Coleta de dados -> processamento -> geração de score -> feedback visual",
     highlights: [
-      "Experiencia gamificada para engajamento",
-      "Geracao de relatorios com IA",
+      "Experiência gamificada para engajamento",
+      "Geração de relatórios com IA",
       "Pensado para uso em campo",
     ],
   },
@@ -27,7 +27,7 @@ export const personalProjects: Project[] = [
     id: "vocallica",
     title: "Vocallica",
     description:
-      "Sistema de gerenciamento de karaoke com fila dinamica e dashboard em tempo real.",
+      "Sistema de gerenciamento de karaokê com fila dinâmica e painel em tempo real.",
     stack: ["Next.js", "Supabase", "UI/UX"],
     role: "Frontend + Arquitetura",
     architecture: "Fila reativa + painel administrativo + controle de estado",

@@ -34,6 +34,7 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
   }
 
   const shouldUseFullscreen = shouldUseMobileFullscreen || window.isMaximized;
+  const shouldUseDesktopMaximized = window.isMaximized && !isMobile;
   const isHidden = (window.isMinimized && !window.isClosing) || (isMobile && !isActive);
   const { handlePointerDown, handlePointerMove, handlePointerUp } = useWindowDrag({
     isMobile,
@@ -57,16 +58,18 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
         isActive
           ? "border-cyan-400/22 shadow-2xl shadow-black/34"
           : "border-white/10 opacity-90 shadow-xl shadow-black/18",
-        shouldUseFullscreen
-          ? "fixed inset-x-2 bottom-2 z-[60] rounded-[1.75rem] md:inset-x-4 md:bottom-4"
+        shouldUseMobileFullscreen
+          ? "fixed inset-x-0 bottom-0 top-0 z-[60] rounded-none"
           : shouldUseMobileSheet
             ? "fixed inset-x-2 bottom-2 z-[60] rounded-[1.75rem]"
-            : "absolute rounded-[1.5rem]",
+            : shouldUseDesktopMaximized
+              ? "absolute rounded-none"
+              : "absolute rounded-[1.5rem]",
         (isHidden || window.isClosing) && "pointer-events-none invisible opacity-0 scale-[0.985]"
       )}
       style={
-        shouldUseFullscreen
-          ? { zIndex: window.zIndex, top: dockOffset }
+        shouldUseMobileFullscreen
+          ? { zIndex: window.zIndex, top: 0 }
           : shouldUseMobileSheet
             ? { zIndex: window.zIndex, top: `max(${dockOffset}px, 24vh)` }
             : {
@@ -102,7 +105,7 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
           <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-slate-950/58 backdrop-blur-[2px]">
             <div className="rounded-3xl border border-white/10 bg-slate-950/82 px-5 py-4 text-sm text-slate-100 shadow-2xl shadow-black/30">
               <div className="space-y-1.5 font-mono">
-                {(window.loadingMessages ?? ["Loading..."]).map((message, index) => (
+                {(window.loadingMessages ?? ["Carregando..."]).map((message, index) => (
                   <p
                     key={`${window.id}-${message}`}
                     className="animate-[terminal-entry_220ms_ease-out_both]"

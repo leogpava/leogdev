@@ -46,21 +46,21 @@ export function TerminalShell() {
         delay: 0,
         entry: {
           type: "info" as const,
-          content: "Booting shell...",
+          content: "Inicializando shell...",
         },
       },
       {
         delay: 120,
         entry: {
           type: "output" as const,
-          content: "Leo Dev Web OS v0.3 ready",
+          content: "Leo Dev Web OS v0.3 pronto",
         },
       },
       {
         delay: 240,
         entry: {
           type: "output" as const,
-          content: 'Type "help" to list commands.',
+          content: 'Digite "help" para listar os comandos.',
         },
       },
     ];
