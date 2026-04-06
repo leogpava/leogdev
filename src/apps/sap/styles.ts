@@ -326,24 +326,6 @@
   color: var(--sap-success);
 }
 
-.sap-inline-button {
-  min-height: 2rem;
-  padding: 0 0.75rem;
-  border: 1px solid var(--sap-border);
-  border-radius: 0.5rem;
-  background: #ffffff;
-  color: var(--sap-brand-strong);
-  font: inherit;
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
-.sap-inline-button--primary {
-  border-color: #0a6ed1;
-  background: #0a6ed1;
-  color: #ffffff;
-}
-
 .sap-section-grid {
   display: grid;
   gap: var(--sap-space-2);
@@ -377,12 +359,19 @@
   gap: 1rem;
   min-height: 0;
   padding: 1rem 1.25rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .sap-card--interactive {
   border-color: var(--sap-border);
   text-align: left;
   cursor: pointer;
+}
+
+.sap-card--overview {
+  align-self: stretch;
 }
 
 .sap-card--interactive:hover {
@@ -462,6 +451,7 @@
   border: 1px solid var(--sap-border-soft);
   border-radius: 0.875rem;
   background: var(--sap-surface-alt);
+  min-width: 0;
 }
 
 .sap-list__item--compact {
@@ -491,6 +481,12 @@
   border-radius: 999px;
   background: var(--sap-brand);
   flex: none;
+}
+
+.sap-bullet-card--overview p {
+  min-width: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .sap-tag-list {

@@ -28,14 +28,6 @@ function SapPageHeader({
           <h1 className="sap-page-header__title">{title}</h1>
           <p className="sap-page-header__description">{description}</p>
         </div>
-        <div className="sap-page-header__actions">
-          <button type="button" className="sap-inline-button">
-            Compartilhar
-          </button>
-          <button type="button" className="sap-inline-button sap-inline-button--primary">
-            Exportar perfil
-          </button>
-        </div>
       </div>
       <div className="sap-page-header__meta">
         <span className="sap-object-status sap-object-status--success">
@@ -101,7 +93,7 @@ function SapOverviewSection() {
         </article>
       </section>
 
-      <section className="sap-card">
+      <section className="sap-card sap-card--overview">
         <div className="sap-card__header">
           <div>
             <p className="sap-card__eyebrow">Atuacao</p>
@@ -111,7 +103,7 @@ function SapOverviewSection() {
         </div>
         <div className="sap-bullet-list">
           {sapOverview.bullets.map((bullet) => (
-            <div key={bullet} className="sap-bullet-card">
+            <div key={bullet} className="sap-bullet-card sap-bullet-card--overview">
               <span className="sap-bullet-card__marker" aria-hidden="true" />
               <p>{bullet}</p>
             </div>
