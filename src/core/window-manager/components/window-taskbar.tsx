@@ -38,7 +38,7 @@ function WindowTaskbarItem({
       type="button"
       onClick={handleClick}
       className={cn(
-        "min-w-0 rounded-full border px-3 py-1.5 text-left transition-all duration-150",
+        "min-w-0 rounded-full border px-3 py-1.5 text-left transition-all duration-150 hover:-translate-y-0.5",
         isActive
           ? "border-cyan-400/35 bg-cyan-400/10 text-cyan-50"
           : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.06]",

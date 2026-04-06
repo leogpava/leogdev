@@ -1,6 +1,7 @@
 import { appDefinitions } from "@/apps/registry";
 import { SHELL_VIRTUAL_PATH } from "@/core/shell/constants/prompt";
 import type { CommandHandler } from "@/core/shell/types/terminal";
+import { resolveOpenCommand } from "@/core/shell/utils/open-navigation";
 import { formatShellDate } from "@/core/shell/utils/format-shell-date";
 import type { AppId } from "@/shared/types/app";
 
@@ -13,9 +14,7 @@ const formatCommandList = (commands: CommandHandler[]) =>
     .join("\n");
 
 const formatAppList = () =>
-  appDefinitions
-    .map((app) => `${`${app.id}/`.padEnd(16, " ")} ${app.title}`)
-    .join("\n");
+  appDefinitions.map((app) => `${`${app.id}/`.padEnd(16, " ")} ${app.title}`).join("\n");
 
 const helpCommand: CommandHandler = {
   name: "help",
@@ -66,44 +65,52 @@ const listCommand: CommandHandler = {
 const openCommand: CommandHandler = {
   name: "open",
   description: "Abre uma aplicacao em uma janela flutuante.",
-  usage: "open <app>",
+  usage: "open <app> [target]",
   execute: (args, context) => {
-    const [requestedAppId] = args;
+    const resolution = resolveOpenCommand(args);
 
-    if (!requestedAppId) {
+    if (!resolution.ok) {
       return {
         entries: [
           {
             type: "error",
-            content: 'usage: open <app>\nUse "ls" para ver os modulos disponiveis.',
+            content: resolution.error,
           },
         ],
       };
     }
 
-    const normalizedAppId = requestedAppId.toLowerCase() as AppId;
-    const appExists = context.apps.some((app) => app.id === normalizedAppId);
+    const appExists = context.apps.some((app) => app.id === resolution.appId);
 
     if (!appExists) {
       return {
         entries: [
           {
             type: "error",
-            content: `app not found: ${requestedAppId}\nUse "ls" para ver as opcoes.`,
+            content: `app not found: ${resolution.appId}\nUse "ls" para ver as opcoes.`,
           },
         ],
       };
     }
 
-    context.openWindow(normalizedAppId);
+    context.openWindow(resolution.appId as AppId, {
+      props: resolution.props,
+      loadingMessages: resolution.loadingMessages,
+      loadingDurationMs: resolution.loadingDurationMs,
+    });
 
     return {
-      entries: [
-        {
-          type: "info",
-          content: `Opening ${normalizedAppId}...`,
+      entries: resolution.output.slice(0, 1).map((content) => ({
+        type: "info" as const,
+        content,
+      })),
+      scheduledEntries: resolution.output.slice(1).map((content, index) => ({
+        delay: 90 + index * 120,
+        entry: {
+          type: "output" as const,
+          content,
         },
-      ],
+      })),
     };
   },
 };
@@ -117,7 +124,7 @@ const whoAmICommand: CommandHandler = {
       {
         type: "output",
         content:
-          "Leonardo\nSenior Front-end Engineer building polished interfaces, systems thinking, and product-grade web experiences.",
+          "Leonardo Pavanelli\nConsultor SAP Integration com foco em integracoes enterprise, arquitetura e interfaces criticas.",
       },
     ],
   }),

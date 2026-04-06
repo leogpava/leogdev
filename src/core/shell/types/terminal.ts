@@ -1,4 +1,5 @@
 import type { AppDefinition, AppId } from "@/shared/types/app";
+import type { OpenWindowOptions } from "@/core/window-manager/types/window-manager";
 
 export type TerminalEntryType = "command" | "output" | "error" | "info";
 
@@ -13,12 +14,16 @@ export type TerminalEntryDraft = Omit<TerminalHistoryEntry, "id">;
 
 export type CommandExecutionResult = {
   entries?: TerminalEntryDraft[];
+  scheduledEntries?: Array<{
+    delay: number;
+    entry: TerminalEntryDraft;
+  }>;
   clearHistory?: boolean;
 };
 
 export type CommandContext = {
   apps: AppDefinition[];
-  openWindow: (appId: AppId) => void;
+  openWindow: (appId: AppId, options?: OpenWindowOptions) => void;
   getCurrentDate: () => Date;
 };
 

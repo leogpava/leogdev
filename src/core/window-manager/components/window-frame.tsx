@@ -29,11 +29,12 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
   const shouldUseMobileSheet = isMobile && definition.mobileMode === "sheet";
   const dockOffset = TASKBAR_HEIGHT + 8;
 
-  if (window.isMinimized || !window.isOpen) {
+  if (!window.isOpen) {
     return null;
   }
 
   const shouldUseFullscreen = shouldUseMobileFullscreen || window.isMaximized;
+  const isHidden = (window.isMinimized && !window.isClosing) || (isMobile && !isActive);
   const { handlePointerDown, handlePointerMove, handlePointerUp } = useWindowDrag({
     isMobile,
     window,
@@ -45,9 +46,14 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
     <article
       role="dialog"
       aria-label={window.title}
-      onMouseDown={() => focusWindow(window.id)}
+      aria-hidden={isHidden}
+      onMouseDown={() => {
+        if (!isHidden) {
+          focusWindow(window.id);
+        }
+      }}
       className={cn(
-        "overflow-hidden border bg-slate-900/95 backdrop-blur-xl transition-[opacity,transform,border-color,box-shadow] duration-150",
+        "window-frame overflow-hidden border bg-slate-900/95 backdrop-blur-xl transition-[opacity,transform,border-color,box-shadow,visibility] duration-180",
         isActive
           ? "border-cyan-400/22 shadow-2xl shadow-black/34"
           : "border-white/10 opacity-90 shadow-xl shadow-black/18",
@@ -55,7 +61,8 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
           ? "fixed inset-x-2 bottom-2 z-[60] rounded-[1.75rem] md:inset-x-4 md:bottom-4"
           : shouldUseMobileSheet
             ? "fixed inset-x-2 bottom-2 z-[60] rounded-[1.75rem]"
-            : "absolute rounded-[1.5rem]"
+            : "absolute rounded-[1.5rem]",
+        (isHidden || window.isClosing) && "pointer-events-none invisible opacity-0 scale-[0.985]"
       )}
       style={
         shouldUseFullscreen
@@ -63,11 +70,11 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
           : shouldUseMobileSheet
             ? { zIndex: window.zIndex, top: `max(${dockOffset}px, 24vh)` }
             : {
-              zIndex: window.zIndex,
-              width: window.size.width,
-              height: window.size.height,
-              transform: `translate(${window.position.x}px, ${window.position.y}px)`,
-            }
+                zIndex: window.zIndex,
+                width: window.size.width,
+                height: window.size.height,
+                transform: `translate(${window.position.x}px, ${window.position.y}px)`,
+              }
       }
     >
       <div className="flex h-full flex-col">
@@ -91,6 +98,23 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
             <AppComponent window={window} />
           </IsolatedAppContainer>
         </div>
+        {window.isLoading ? (
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-slate-950/58 backdrop-blur-[2px]">
+            <div className="rounded-3xl border border-white/10 bg-slate-950/82 px-5 py-4 text-sm text-slate-100 shadow-2xl shadow-black/30">
+              <div className="space-y-1.5 font-mono">
+                {(window.loadingMessages ?? ["Loading..."]).map((message, index) => (
+                  <p
+                    key={`${window.id}-${message}`}
+                    className="animate-[terminal-entry_220ms_ease-out_both]"
+                    style={{ animationDelay: `${index * 90}ms` }}
+                  >
+                    {message}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
     </article>
   );

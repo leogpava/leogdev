@@ -1,6 +1,12 @@
 import type { ComponentType } from "react";
 
-export type AppId = "sap" | "projetos" | "automacoes" | "about";
+export type AppId =
+  | "sap"
+  | "projects"
+  | "automacoes"
+  | "about"
+  | "skills"
+  | "contact";
 
 export type WindowPosition = {
   x: number;
@@ -25,8 +31,11 @@ export type WindowInstance = {
   appId: AppId;
   title: string;
   isOpen: boolean;
+  isClosing?: boolean;
   isMinimized: boolean;
   isMaximized: boolean;
+  isLoading?: boolean;
+  loadingMessages?: string[];
   zIndex: number;
   position: WindowPosition;
   size: WindowSize;

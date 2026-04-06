@@ -18,19 +18,38 @@ const getNextZIndex = (windows: WindowInstance[]) =>
 
 const getNextActiveWindowId = (windows: WindowInstance[]) =>
   windows
-    .filter((window) => !window.isMinimized)
+    .filter((window) => !window.isMinimized && !window.isClosing)
     .sort((left, right) => right.zIndex - left.zIndex)[0]?.id ?? null;
+
+const finishWindowLoading = (windowId: string, delay: number) => {
+  window.setTimeout(() => {
+    useWindowManager.setState((state) => ({
+      windows: state.windows.map((entry) =>
+        entry.id === windowId
+          ? {
+              ...entry,
+              isLoading: false,
+            }
+          : entry
+      ),
+    }));
+  }, delay);
+};
 
 const buildWindowInstance = (appId: AppId, windows: WindowInstance[], options?: OpenWindowOptions): WindowInstance => {
   const definition = appRegistry[appId];
+  const shouldShowLoading = Boolean(options?.loadingMessages?.length);
 
   return {
     id: `${appId}-window`,
     appId,
     title: definition.title,
     isOpen: true,
+    isClosing: false,
     isMinimized: false,
     isMaximized: false,
+    isLoading: shouldShowLoading,
+    loadingMessages: options?.loadingMessages,
     zIndex: getNextZIndex(windows),
     position: definition.defaultPosition,
     size: definition.defaultSize,
@@ -48,6 +67,12 @@ export const useWindowManager = create<WindowManagerState>((set) => ({
 
       if (existing) {
         const nextZIndex = getNextZIndex(state.windows);
+        const loadingMessages = options?.loadingMessages ?? existing.loadingMessages;
+        const shouldShowLoading = Boolean(loadingMessages?.length);
+
+        if (shouldShowLoading) {
+          finishWindowLoading(existing.id, options?.loadingDurationMs ?? 600);
+        }
 
         return {
           windows: state.windows.map((window) =>
@@ -55,9 +80,13 @@ export const useWindowManager = create<WindowManagerState>((set) => ({
               ? {
                   ...window,
                   isOpen: true,
+                  isClosing: false,
                   isMinimized: false,
                   isMaximized: window.isMaximized,
+                  isLoading: shouldShowLoading,
+                  loadingMessages,
                   zIndex: nextZIndex,
+                  props: options?.props ? { ...window.props, ...options.props } : window.props,
                 }
               : window
           ),
@@ -67,6 +96,10 @@ export const useWindowManager = create<WindowManagerState>((set) => ({
 
       const nextWindow = buildWindowInstance(appId, state.windows, options);
 
+      if (nextWindow.isLoading) {
+        finishWindowLoading(nextWindow.id, options?.loadingDurationMs ?? 600);
+      }
+
       return {
         windows: [...state.windows, nextWindow],
         activeWindowId: nextWindow.id,
@@ -74,11 +107,31 @@ export const useWindowManager = create<WindowManagerState>((set) => ({
     }),
   closeWindow: (windowId) =>
     set((state) => {
-      const remainingWindows = state.windows.filter((window) => window.id !== windowId);
+      const nextWindows = state.windows.map((window) =>
+        window.id === windowId
+          ? {
+              ...window,
+              isClosing: true,
+              isMinimized: true,
+            }
+          : window
+      );
+
+      window.setTimeout(() => {
+        useWindowManager.setState((currentState) => {
+          const remainingWindows = currentState.windows.filter((window) => window.id !== windowId);
+
+          return {
+            windows: remainingWindows,
+            activeWindowId: getNextActiveWindowId(remainingWindows),
+          };
+        });
+      }, 160);
 
       return {
-        windows: remainingWindows,
-        activeWindowId: getNextActiveWindowId(remainingWindows),
+        windows: nextWindows,
+        activeWindowId:
+          state.activeWindowId === windowId ? getNextActiveWindowId(nextWindows) : state.activeWindowId,
       };
     }),
   focusWindow: (windowId) =>

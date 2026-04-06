@@ -6,20 +6,10 @@ import { appDefinitions } from "@/apps/registry";
 import { TerminalHistoryItem } from "@/core/shell/components/terminal-history-item";
 import { TerminalPrompt } from "@/core/shell/components/terminal-prompt";
 import { SHELL_PROMPT } from "@/core/shell/constants/prompt";
+import { getShellSuggestions } from "@/core/shell/utils/get-shell-suggestions";
 import { useTerminalStore } from "@/core/shell/store/use-terminal-store";
 import { executeShellCommand } from "@/core/shell/utils/execute-shell-command";
 import { useWindowManager } from "@/core/window-manager/store/use-window-manager";
-
-const INITIAL_ENTRIES = [
-  {
-    type: "info" as const,
-    content: "Leo Dev Web OS v0.2",
-  },
-  {
-    type: "output" as const,
-    content: 'Digite "help" para listar os comandos disponiveis.',
-  },
-];
 
 export function TerminalShell() {
   const inputValue = useTerminalStore((state) => state.inputValue);
@@ -30,17 +20,65 @@ export function TerminalShell() {
   const appendEntries = useTerminalStore((state) => state.appendEntries);
   const clearHistory = useTerminalStore((state) => state.clearHistory);
   const initializeHistory = useTerminalStore((state) => state.initializeHistory);
+  const recordCommand = useTerminalStore((state) => state.recordCommand);
+  const navigateHistory = useTerminalStore((state) => state.navigateHistory);
+  const resetHistoryNavigation = useTerminalStore((state) => state.resetHistoryNavigation);
   const openWindow = useWindowManager((state) => state.openWindow);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const historyViewportRef = useRef<HTMLDivElement | null>(null);
   const promptFormRef = useRef<HTMLFormElement | null>(null);
   const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
+  const scheduledTimeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
     if (!hasBooted) {
-      initializeHistory(INITIAL_ENTRIES);
+      initializeHistory();
     }
   }, [hasBooted, initializeHistory]);
+
+  useEffect(() => {
+    if (!hasBooted || history.length > 0) {
+      return;
+    }
+
+    const bootSequence = [
+      {
+        delay: 0,
+        entry: {
+          type: "info" as const,
+          content: "Booting shell...",
+        },
+      },
+      {
+        delay: 120,
+        entry: {
+          type: "output" as const,
+          content: "Leo Dev Web OS v0.3 ready",
+        },
+      },
+      {
+        delay: 240,
+        entry: {
+          type: "output" as const,
+          content: 'Type "help" to list commands.',
+        },
+      },
+    ];
+
+    scheduledTimeoutsRef.current = bootSequence.map(({ delay, entry }) =>
+      window.setTimeout(() => {
+        appendEntry(entry);
+      }, delay)
+    );
+  }, [appendEntry, hasBooted, history.length]);
+
+  useEffect(
+    () => () => {
+      scheduledTimeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+      scheduledTimeoutsRef.current = [];
+    },
+    []
+  );
 
   const scrollToPrompt = useCallback((behavior: ScrollBehavior = "auto") => {
     const viewport = historyViewportRef.current;
@@ -113,6 +151,7 @@ export function TerminalShell() {
       type: "command",
       content: rawInput,
     });
+    recordCommand(rawInput);
     setInputValue("");
 
     const result = executeShellCommand(rawInput, commandContext);
@@ -127,7 +166,58 @@ export function TerminalShell() {
       appendEntries(result.entries);
     }
 
+    result.scheduledEntries?.forEach(({ delay, entry }) => {
+      const timeoutId = window.setTimeout(() => {
+        appendEntry(entry);
+      }, delay);
+
+      scheduledTimeoutsRef.current.push(timeoutId);
+    });
+
     focusInput("auto");
+  };
+
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+
+      const suggestions = getShellSuggestions(inputValue);
+
+      if (suggestions.nextValue) {
+        setInputValue(suggestions.nextValue);
+        resetHistoryNavigation(suggestions.nextValue);
+        return;
+      }
+
+      if (suggestions.showSuggestions && suggestions.matches.length > 0) {
+        appendEntry({
+          type: "info",
+          content: suggestions.matches.join("    "),
+        });
+      }
+
+      focusInput("auto");
+      return;
+    }
+
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      navigateHistory("up");
+      focusInput("auto");
+      return;
+    }
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      navigateHistory("down");
+      focusInput("auto");
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextValue = event.target.value;
+    setInputValue(nextValue);
+    resetHistoryNavigation(nextValue);
   };
 
   return (
@@ -138,7 +228,7 @@ export function TerminalShell() {
       <div className="relative z-10 flex flex-1 flex-col p-3 pt-16 md:p-4 md:pt-18">
         <div
           onMouseDown={handleShellPointerDown}
-          className="flex flex-1 flex-col rounded-[1.8rem] border border-white/10 bg-slate-950/72 shadow-2xl shadow-black/30 backdrop-blur-xl"
+          className="terminal-panel flex flex-1 flex-col rounded-[1.8rem] border border-white/10 bg-slate-950/72 shadow-2xl shadow-black/30 backdrop-blur-xl"
         >
           <div
             ref={historyViewportRef}
@@ -157,12 +247,13 @@ export function TerminalShell() {
             onSubmit={handleSubmit}
             className="border-t border-white/10 bg-slate-950/80 px-4 py-3 md:px-5"
           >
-            <label className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+            <label className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-[border-color,box-shadow,background-color] duration-150 focus-within:border-cyan-300/35 focus-within:bg-white/[0.045] focus-within:shadow-[0_0_0_1px_rgba(34,211,238,0.08)]">
               <TerminalPrompt />
               <input
                 ref={inputRef}
                 value={inputValue}
-                onChange={(event) => setInputValue(event.target.value)}
+                onChange={handleInputChange}
+                onKeyDown={handleInputKeyDown}
                 className="min-w-0 flex-1 bg-transparent font-mono text-sm text-slate-50 caret-cyan-300 outline-none placeholder:text-slate-500"
                 placeholder="Digite um comando"
                 aria-label={`Command input for ${SHELL_PROMPT}`}

@@ -17,7 +17,7 @@ const containerStyles = {
 export function TerminalHistoryItem({ entry }: TerminalHistoryItemProps) {
   if (entry.type === "command") {
     return (
-      <div className="flex items-start gap-3 whitespace-pre-wrap break-words">
+      <div className="animate-[terminal-entry_220ms_ease-out_both] flex items-start gap-3 whitespace-pre-wrap break-words">
         <TerminalPrompt className="pt-0.5" />
         <span className="min-w-0 flex-1 font-mono text-sm text-slate-100">
           {entry.content}
@@ -29,7 +29,7 @@ export function TerminalHistoryItem({ entry }: TerminalHistoryItemProps) {
   return (
     <div
       className={cn(
-        "whitespace-pre-wrap rounded-xl py-0.5 font-mono text-sm leading-7 break-words",
+        "animate-[terminal-entry_220ms_ease-out_both] whitespace-pre-wrap rounded-xl py-0.5 font-mono text-sm leading-7 break-words",
         containerStyles[entry.type]
       )}
     >

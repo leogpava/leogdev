@@ -77,7 +77,7 @@ export function WindowHeader({
             stopEvent(event);
             onMinimize();
           }}
-          className="h-3 w-3 rounded-full bg-sky-300/90 transition hover:scale-110"
+          className="h-3 w-3 rounded-full bg-sky-300/90 transition duration-150 hover:scale-110 hover:brightness-110"
           aria-label="Minimizar janela"
         />
         <button
@@ -87,7 +87,7 @@ export function WindowHeader({
             stopEvent(event);
             onMaximize();
           }}
-          className="h-3 w-3 rounded-full bg-amber-300 transition hover:scale-110"
+          className="h-3 w-3 rounded-full bg-amber-300 transition duration-150 hover:scale-110 hover:brightness-110"
           aria-label={isMaximized ? "Restaurar janela" : "Maximizar janela"}
         />
         <button
@@ -97,7 +97,7 @@ export function WindowHeader({
             stopEvent(event);
             onClose();
           }}
-          className="h-3 w-3 rounded-full bg-rose-400 transition hover:scale-110"
+          className="h-3 w-3 rounded-full bg-rose-400 transition duration-150 hover:scale-110 hover:brightness-110"
           aria-label="Fechar janela"
         />
       </div>

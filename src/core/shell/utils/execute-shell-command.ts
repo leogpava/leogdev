@@ -4,6 +4,7 @@ import type {
   CommandContext,
   CommandExecutionResult,
 } from "@/core/shell/types/terminal";
+import type { AppId } from "@/shared/types/app";
 
 export function executeShellCommand(
   rawInput: string,
@@ -15,7 +16,14 @@ export function executeShellCommand(
     return { entries: [] };
   }
 
-  const command = resolveCommand(parsedCommand.commandName, commandRegistry);
+  const isDirectAppLaunch = context.apps.some(
+    (app) => app.id === (parsedCommand.commandName as AppId)
+  );
+  const effectiveCommandName = isDirectAppLaunch ? "open" : parsedCommand.commandName;
+  const effectiveArgs = isDirectAppLaunch
+    ? [parsedCommand.commandName, ...parsedCommand.args]
+    : parsedCommand.args;
+  const command = resolveCommand(effectiveCommandName, commandRegistry);
 
   if (!command) {
     return {
@@ -28,5 +36,5 @@ export function executeShellCommand(
     };
   }
 
-  return command.execute(parsedCommand.args, context);
+  return command.execute(effectiveArgs, context);
 }

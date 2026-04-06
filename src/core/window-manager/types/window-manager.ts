@@ -2,6 +2,8 @@ import type { AppId, WindowInstance } from "@/shared/types/app";
 
 export type OpenWindowOptions = {
   props?: Record<string, unknown>;
+  loadingMessages?: string[];
+  loadingDurationMs?: number;
 };
 
 export type WindowManagerState = {
