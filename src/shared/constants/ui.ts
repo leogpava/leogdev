@@ -1,0 +1,6 @@
+export const MOBILE_BREAKPOINT = 768;
+export const WINDOW_Z_INDEX_BASE = 20;
+export const DESKTOP_WINDOW_MIN_VISIBLE_WIDTH = 280;
+export const DESKTOP_WINDOW_HEADER_HEIGHT = 56;
+export const DESKTOP_WINDOW_PADDING = 16;
+export const TASKBAR_HEIGHT = 72;
