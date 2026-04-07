@@ -4,15 +4,15 @@ import { ProjectsApp } from "./index";
 
 export const projectsAppDefinition: AppDefinition = {
   id: "projects",
-  title: "Projetos",
+  title: "Project Lab",
   component: ProjectsApp,
   defaultSize: {
-    width: 820,
-    height: 540,
+    width: 1120,
+    height: 720,
   },
   defaultPosition: {
-    x: 148,
-    y: 104,
+    x: 96,
+    y: 72,
   },
   isolation: "none",
   mobileMode: "fullscreen",
