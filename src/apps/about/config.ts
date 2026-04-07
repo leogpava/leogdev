@@ -1,19 +1,21 @@
 import type { AppDefinition } from "@/shared/types/app";
 
 import { AboutApp } from "./index";
+import { aboutAppStyles } from "./styles";
 
 export const aboutAppDefinition: AppDefinition = {
   id: "about",
   title: "Sobre",
   component: AboutApp,
   defaultSize: {
-    width: 640,
-    height: 440,
+    width: 760,
+    height: 560,
   },
   defaultPosition: {
-    x: 212,
-    y: 88,
+    x: 180,
+    y: 72,
   },
-  isolation: "none",
+  isolation: "shadow",
   mobileMode: "sheet",
+  isolatedStyleText: aboutAppStyles,
 };
