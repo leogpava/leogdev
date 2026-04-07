@@ -7,10 +7,7 @@ import type { AppId } from "@/shared/types/app";
 
 const formatCommandList = (commands: CommandHandler[]) =>
   commands
-    .map(
-      (command) =>
-        `${command.name.padEnd(10, " ")} ${command.usage.padEnd(18, " ")} ${command.description}`
-    )
+    .map((command) => `${command.usage.padEnd(22, " ")} ${command.description}`)
     .join("\n");
 
 const formatAppList = () =>
