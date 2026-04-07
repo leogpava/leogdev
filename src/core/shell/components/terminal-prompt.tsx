@@ -12,11 +12,11 @@ export function TerminalPrompt({ className }: TerminalPromptProps) {
         className
       )}
     >
-      <span className="text-emerald-300">leonardo</span>
-      <span className="text-slate-500">@</span>
-      <span className="text-cyan-300">portfolio</span>
-      <span className="text-slate-500">:~</span>
-      <span className="text-amber-300">$</span>
+      <span className="text-[#79b8ff]">leonardo</span>
+      <span className="text-[#727272]">@</span>
+      <span className="text-[#e0e0e0]">portfolio</span>
+      <span className="text-[#888888]">:~</span>
+      <span className="text-[#ffab70]">$</span>
     </span>
   );
 }

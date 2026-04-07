@@ -8,10 +8,10 @@ type TerminalHistoryItemProps = {
 };
 
 const containerStyles = {
-  command: "text-slate-100",
-  output: "border-l border-white/10 pl-4 text-slate-300",
-  error: "border-l border-rose-400/40 bg-rose-400/5 pl-4 text-rose-200",
-  info: "border-l border-cyan-400/30 pl-4 text-cyan-200/90",
+  command: "text-[#fafafa]",
+  output: "border-l border-[#313131] pl-4 text-[#e0e0e0]",
+  error: "border-l border-[#f97583]/35 bg-[#f97583]/8 pl-4 text-[#ffb8bf]",
+  info: "border-l border-[#79b8ff]/25 bg-[#79b8ff]/6 pl-4 text-[#c8ddff]",
 } as const;
 
 export function TerminalHistoryItem({ entry }: TerminalHistoryItemProps) {
@@ -19,7 +19,7 @@ export function TerminalHistoryItem({ entry }: TerminalHistoryItemProps) {
     return (
       <div className="animate-[terminal-entry_220ms_ease-out_both] flex items-start gap-3 whitespace-pre-wrap break-words">
         <TerminalPrompt className="pt-0.5" />
-        <span className="min-w-0 flex-1 font-mono text-sm text-slate-100">
+        <span className="min-w-0 flex-1 font-mono text-sm text-[#fafafa]">
           {entry.content}
         </span>
       </div>

@@ -68,17 +68,11 @@
 }
 
 .sap-shellbar__logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 1.5rem;
-  border-radius: 0.375rem;
-  background: linear-gradient(180deg, #18a4f5 0%, #0a6ed1 100%);
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  display: block;
+  width: 3rem;
+  height: 1.875rem;
+  object-fit: contain;
+  flex: none;
 }
 
 .sap-shellbar__titles {
@@ -397,6 +391,34 @@
   color: var(--sap-heading);
   font-size: 1.0625rem;
   font-weight: 700;
+}
+
+.sap-company-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 9.5rem;
+  max-width: 100%;
+  height: 3rem;
+  padding: 0;
+}
+
+.sap-company-logo--kpi {
+  width: 10.5rem;
+  height: 3.25rem;
+  margin-top: 0.375rem;
+}
+
+.sap-company-logo--title {
+  width: 11rem;
+  height: 3.25rem;
+}
+
+.sap-company-logo__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .sap-card__text {

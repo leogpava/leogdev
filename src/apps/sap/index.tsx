@@ -13,6 +13,17 @@ import {
 } from "@/shared/data/sap";
 import type { AppComponentProps } from "@/shared/types/app";
 
+const LAB2DEV_LOGO_URL = "https://www.lab2dev.com/wp-content/uploads/2025/07/1938.png";
+const SAP_LOGO_URL = "https://www.sap.com/aemedge/icons/sap-logo.svg";
+
+function Lab2devLogo({ className }: { className?: string }) {
+  return (
+    <span className={`sap-company-logo${className ? ` ${className}` : ""}`}>
+      <img src={LAB2DEV_LOGO_URL} alt="Lab2dev" className="sap-company-logo__image" />
+    </span>
+  );
+}
+
 function SapPageHeader({
   title,
   description,
@@ -48,7 +59,13 @@ function SapOverviewSection() {
         {sapOverview.metrics.map((metric) => (
           <article key={metric.label} className="sap-kpi">
             <p className="sap-kpi__label">{metric.label}</p>
-            <p className="sap-kpi__value">{metric.value}</p>
+            <div className="sap-kpi__value">
+              {metric.value.toLowerCase() === "lab2dev" ? (
+                <Lab2devLogo className="sap-company-logo--kpi" />
+              ) : (
+                metric.value
+              )}
+            </div>
             <p className="sap-kpi__hint">{metric.hint}</p>
           </article>
         ))}
@@ -120,7 +137,13 @@ function SapExperienceSection() {
       <div className="sap-card__header">
         <div>
           <p className="sap-card__eyebrow">Experiencia</p>
-          <h3 className="sap-card__title">{sapExperience.company}</h3>
+          <div className="sap-card__title">
+            {sapExperience.company.toLowerCase() === "lab2dev" ? (
+              <Lab2devLogo className="sap-company-logo--title" />
+            ) : (
+              sapExperience.company
+            )}
+          </div>
         </div>
         <span className="sap-pill">{sapExperience.period}</span>
       </div>
@@ -292,9 +315,7 @@ export function SapApp({ window }: AppComponentProps) {
             <button type="button" className="sap-shellbar__menu" aria-label="Abrir menu">
               =
             </button>
-            <span className="sap-shellbar__logo" aria-hidden="true">
-              SAP
-            </span>
+            <img src={SAP_LOGO_URL} alt="SAP" className="sap-shellbar__logo" />
             <div className="sap-shellbar__titles">
               <p className="sap-shellbar__product">{window.title}</p>
               <p className="sap-shellbar__meta">Fiori launchpad · perfil profissional SAP</p>

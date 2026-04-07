@@ -13,7 +13,7 @@ export function Workspace() {
   const shouldHideTerminal = isMobile && Boolean(activeWindowId);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950">
+    <main className="relative min-h-screen overflow-hidden bg-[#161616]">
       <div
         className={cn(
           "transition-opacity duration-200",

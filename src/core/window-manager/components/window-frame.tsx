@@ -54,10 +54,10 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
         }
       }}
       className={cn(
-        "window-frame overflow-hidden border bg-slate-900/95 backdrop-blur-xl transition-[opacity,transform,border-color,box-shadow,visibility] duration-180",
+        "window-frame overflow-hidden border bg-[#1a1a1a]/96 backdrop-blur-xl transition-[opacity,transform,border-color,box-shadow,visibility] duration-180",
         isActive
-          ? "border-cyan-400/22 shadow-2xl shadow-black/34"
-          : "border-white/10 opacity-90 shadow-xl shadow-black/18",
+          ? "border-[#444444] opacity-100 shadow-2xl shadow-black/34"
+          : "border-[#313131] opacity-90 shadow-xl shadow-black/18",
         shouldUseMobileFullscreen
           ? "fixed inset-x-0 bottom-0 top-0 z-[60] rounded-none"
           : shouldUseMobileSheet
@@ -102,8 +102,8 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
           </IsolatedAppContainer>
         </div>
         {window.isLoading ? (
-          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-slate-950/58 backdrop-blur-[2px]">
-            <div className="rounded-3xl border border-white/10 bg-slate-950/82 px-5 py-4 text-sm text-slate-100 shadow-2xl shadow-black/30">
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-[#161616]/66 backdrop-blur-[2px]">
+            <div className="rounded-3xl border border-[#313131] bg-[#202020]/92 px-5 py-4 text-sm text-[#fafafa] shadow-2xl shadow-black/30">
               <div className="space-y-1.5 font-mono">
                 {(window.loadingMessages ?? ["Carregando..."]).map((message, index) => (
                   <p

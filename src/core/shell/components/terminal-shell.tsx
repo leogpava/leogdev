@@ -53,7 +53,7 @@ export function TerminalShell() {
         delay: 120,
         entry: {
           type: "output" as const,
-          content: "Leo Dev Web OS v0.3 pronto",
+          content: "leonardoOS v0.8 pronto",
         },
       },
       {
@@ -221,14 +221,14 @@ export function TerminalShell() {
   };
 
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#07111d] text-slate-100">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.12),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(34,197,94,0.12),_transparent_30%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] [background-size:3rem_3rem]" />
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#161616] text-[#fafafa]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(179,146,240,0.08),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(121,184,255,0.05),_transparent_28%),radial-gradient(circle_at_18%_80%,_rgba(249,117,131,0.04),_transparent_24%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(250,250,250,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(250,250,250,0.035)_1px,transparent_1px)] [background-size:3rem_3rem]" />
 
       <div className="relative z-10 flex flex-1 flex-col p-3 pt-16 md:p-4 md:pt-18">
         <div
           onMouseDown={handleShellPointerDown}
-          className="terminal-panel flex flex-1 flex-col rounded-[1.8rem] border border-white/10 bg-slate-950/72 shadow-2xl shadow-black/30 backdrop-blur-xl"
+          className="terminal-panel flex flex-1 flex-col rounded-[1.8rem] border border-[#313131]/95 bg-[#1a1a1a]/88 backdrop-blur-xl"
         >
           <div
             ref={historyViewportRef}
@@ -245,16 +245,16 @@ export function TerminalShell() {
           <form
             ref={promptFormRef}
             onSubmit={handleSubmit}
-            className="border-t border-white/10 bg-slate-950/80 px-4 py-3 md:px-5"
+            className="border-t border-[#313131]/95 bg-[#1a1a1a]/94 px-4 py-3 md:px-5"
           >
-            <label className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-[border-color,box-shadow,background-color] duration-150 focus-within:border-cyan-300/35 focus-within:bg-white/[0.045] focus-within:shadow-[0_0_0_1px_rgba(34,211,238,0.08)]">
+            <label className="group flex items-center gap-3 rounded-2xl border border-[#313131] bg-[#202020] px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_0_0_1px_rgba(0,0,0,0.08)] transition-[border-color,box-shadow,background-color] duration-150 focus-within:border-[#444444] focus-within:bg-[#242424] focus-within:shadow-[0_0_0_1px_rgba(68,68,68,0.7),0_0_22px_rgba(179,146,240,0.05)]">
               <TerminalPrompt />
               <input
                 ref={inputRef}
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleInputKeyDown}
-                className="min-w-0 flex-1 bg-transparent font-mono text-sm text-slate-50 caret-cyan-300 outline-none placeholder:text-slate-500"
+                className="min-w-0 flex-1 bg-transparent font-mono text-sm text-[#fafafa] caret-[#b392f0] outline-none placeholder:text-[#727272]"
                 placeholder="Digite um comando"
                 aria-label={`Command input for ${SHELL_PROMPT}`}
                 autoCapitalize="none"

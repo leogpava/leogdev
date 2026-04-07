@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Leo Dev Web OS",
+  title: "leonardoOS",
   description: "Portfólio gamificado em formato de sistema operacional web.",
 };
 

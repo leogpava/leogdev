@@ -15,10 +15,10 @@ const INITIAL_LINES = [
 ];
 
 const lineStyles = {
-  input: "text-emerald-200",
-  output: "text-slate-200",
-  error: "text-rose-300",
-  system: "text-cyan-300",
+  input: "text-[#79b8ff]",
+  output: "text-[#e0e0e0]",
+  error: "text-[#f97583]",
+  system: "text-[#b392f0]",
 } as const;
 
 export { TerminalShell as Terminal } from "./terminal-shell";
@@ -89,29 +89,29 @@ export { TerminalShell as Terminal } from "./terminal-shell";
   };
 
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#07111d] text-slate-100">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.12),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(34,197,94,0.12),_transparent_30%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] [background-size:3rem_3rem]" />
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#161616] text-[#fafafa]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(179,146,240,0.08),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(121,184,255,0.05),_transparent_30%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(250,250,250,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(250,250,250,0.035)_1px,transparent_1px)] [background-size:3rem_3rem]" />
 
       <div className="relative z-10 flex flex-1 flex-col p-4 md:p-6">
-        <header className="mb-4 flex items-center justify-between rounded-3xl border border-white/10 bg-slate-950/60 px-4 py-3 backdrop-blur-md">
+        <header className="mb-4 flex items-center justify-between rounded-3xl border border-[#313131] bg-[#1a1a1a]/88 px-4 py-3 backdrop-blur-md">
           <div>
-            <p className="text-xs uppercase tracking-[0.4em] text-cyan-300/75">
+            <p className="text-xs uppercase tracking-[0.4em] text-[#888888]">
               Web OS
             </p>
-            <h1 className="mt-1 text-lg font-semibold text-white md:text-xl">
+            <h1 className="mt-1 text-lg font-semibold text-[#fafafa] md:text-xl">
               Terminal Interface
             </h1>
           </div>
           <div className="flex gap-2">
-            <span className="h-3 w-3 rounded-full bg-rose-400/80" />
-            <span className="h-3 w-3 rounded-full bg-amber-300/80" />
-            <span className="h-3 w-3 rounded-full bg-emerald-400/80" />
+            <span className="h-3 w-3 rounded-full bg-[#f97583]" />
+            <span className="h-3 w-3 rounded-full bg-[#ffab70]" />
+            <span className="h-3 w-3 rounded-full bg-[#79b8ff]" />
           </div>
         </header>
 
-        <div className="flex flex-1 flex-col rounded-[2rem] border border-white/10 bg-slate-950/70 shadow-2xl shadow-black/30 backdrop-blur-xl">
-          <div className="border-b border-white/10 px-4 py-3 text-xs uppercase tracking-[0.32em] text-slate-400">
+        <div className="flex flex-1 flex-col rounded-[2rem] border border-[#313131] bg-[#1a1a1a]/90 shadow-2xl shadow-black/30 backdrop-blur-xl">
+          <div className="border-b border-[#313131] px-4 py-3 text-xs uppercase tracking-[0.32em] text-[#888888]">
             root session
           </div>
 
@@ -126,14 +126,14 @@ export { TerminalShell as Terminal } from "./terminal-shell";
 
           <form
             onSubmit={handleSubmit}
-            className="border-t border-white/10 px-4 py-4"
+            className="border-t border-[#313131] px-4 py-4"
           >
-            <label className="flex items-center gap-3 font-mono text-sm text-emerald-200">
+            <label className="flex items-center gap-3 font-mono text-sm text-[#79b8ff]">
               <span className="shrink-0">guest@leodev:~$</span>
               <input
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                className="min-w-0 flex-1 bg-transparent text-slate-50 outline-none placeholder:text-slate-500"
+                className="min-w-0 flex-1 bg-transparent text-[#fafafa] outline-none placeholder:text-[#727272]"
                 placeholder="Digite um comando"
                 autoCapitalize="none"
                 autoCorrect="off"

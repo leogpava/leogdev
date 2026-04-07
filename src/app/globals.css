@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050b14;
-  --foreground: #e2e8f0;
+  --background: #161616;
+  --foreground: #fafafa;
+  --shell-bg: #161616;
+  --shell-surface-1: #1a1a1a;
+  --shell-surface-2: #1f1f1f;
+  --shell-surface-3: #202020;
+  --shell-surface-4: #2a2a2a;
+  --shell-border: #313131;
+  --shell-border-strong: #444444;
+  --shell-text: #fafafa;
+  --shell-text-soft: #e0e0e0;
+  --shell-text-muted: #888888;
+  --shell-text-dim: #727272;
+  --shell-accent-purple: #b392f0;
+  --shell-accent-blue: #79b8ff;
+  --shell-accent-rose: #f97583;
+  --shell-accent-orange: #ffab70;
+  --shell-glow-purple: rgba(179, 146, 240, 0.08);
+  --shell-glow-blue: rgba(121, 184, 255, 0.06);
+  --shell-glow-rose: rgba(249, 117, 131, 0.05);
   --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
   --font-mono: "Fira Code", "JetBrains Mono", "Cascadia Code", monospace;
 }
@@ -19,14 +37,16 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(34, 211, 238, 0.08), transparent 28%),
-    linear-gradient(180deg, #091220 0%, #050b14 100%);
+    radial-gradient(circle at top, var(--shell-glow-purple), transparent 28%),
+    radial-gradient(circle at 85% 18%, var(--shell-glow-blue), transparent 24%),
+    radial-gradient(circle at bottom, var(--shell-glow-rose), transparent 34%),
+    linear-gradient(180deg, #1b1b1b 0%, var(--shell-bg) 100%);
   color: var(--foreground);
   font-family: var(--font-display), sans-serif;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.24);
+  background: rgba(179, 146, 240, 0.22);
   color: #f8fafc;
 }
 
@@ -47,10 +67,18 @@ button {
 
 .terminal-panel {
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 0 36px rgba(179, 146, 240, 0.04);
 }
 
 .terminal-panel:hover {
-  border-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(68, 68, 68, 0.95);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 42px rgba(121, 184, 255, 0.04);
 }
 
 .window-frame {
