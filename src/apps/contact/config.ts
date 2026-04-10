@@ -1,6 +1,7 @@
 import type { AppDefinition } from "@/shared/types/app";
 
 import { ContactApp } from "./index";
+import { contactAppStyles } from "./styles";
 
 export const contactAppDefinition: AppDefinition = {
   id: "contact",
@@ -14,6 +15,7 @@ export const contactAppDefinition: AppDefinition = {
     x: 236,
     y: 108,
   },
-  isolation: "none",
+  isolation: "shadow",
   mobileMode: "sheet",
+  isolatedStyleText: contactAppStyles,
 };

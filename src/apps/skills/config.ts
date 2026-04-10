@@ -4,15 +4,15 @@ import { SkillsApp } from "./index";
 
 export const skillsAppDefinition: AppDefinition = {
   id: "skills",
-  title: "Competências",
+  title: "Skills",
   component: SkillsApp,
   defaultSize: {
-    width: 760,
-    height: 500,
+    width: 1180,
+    height: 760,
   },
   defaultPosition: {
-    x: 188,
-    y: 124,
+    x: 120,
+    y: 72,
   },
   isolation: "none",
   mobileMode: "sheet",

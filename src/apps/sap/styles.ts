@@ -27,6 +27,7 @@
   display: flex;
   height: 100%;
   min-height: 0;
+  overflow: hidden;
   background: var(--sap-page);
   color: var(--sap-text);
 }
@@ -35,7 +36,9 @@
   display: grid;
   grid-template-rows: 3rem minmax(0, 1fr);
   width: 100%;
+  height: 100%;
   min-height: 0;
+  overflow: hidden;
   background: var(--sap-page);
 }
 
@@ -154,7 +157,9 @@
 .sap-body {
   display: grid;
   grid-template-columns: 15rem minmax(0, 1fr);
+  height: 100%;
   min-height: 0;
+  overflow: hidden;
 }
 
 .sap-sidebar {
@@ -162,6 +167,7 @@
   grid-template-rows: auto minmax(0, 1fr);
   gap: var(--sap-space-2);
   min-height: 0;
+  overflow: hidden;
   padding: 1rem 0;
   border-right: 1px solid var(--sap-border-soft);
   background: var(--sap-shell);
@@ -179,6 +185,8 @@
   display: grid;
   align-content: start;
   gap: 0.125rem;
+  min-height: 0;
+  overflow-y: auto;
   padding: 0 0.5rem;
 }
 
@@ -240,11 +248,17 @@
 
 .sap-content {
   display: grid;
-  align-content: start;
-  gap: var(--sap-space-2);
+  min-width: 0;
   min-height: 0;
   overflow-y: auto;
   padding: 1rem 1.5rem 1.5rem;
+}
+
+.sap-content__inner {
+  display: grid;
+  align-content: start;
+  gap: var(--sap-space-2);
+  min-height: min-content;
 }
 
 .sap-page-header {

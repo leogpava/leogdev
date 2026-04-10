@@ -13,7 +13,7 @@ export function WindowLayer() {
   const isMobile = useIsMobile();
 
   const renderedWindows = windows
-    .filter((window) => window.isOpen)
+    .filter((window) => window.isOpen && (!window.isMinimized || window.isClosing))
     .slice()
     .sort((left, right) => left.zIndex - right.zIndex);
   const activeWindow = renderedWindows.find((window) => window.id === activeWindowId) ?? null;

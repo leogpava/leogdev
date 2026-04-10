@@ -20,7 +20,9 @@ export const aboutAppStyles = `
   --about-muted: #cfcfcf;
   --about-shadow: #000000;
   display: flex;
-  min-height: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
   background:
     linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 100%),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 100%),
@@ -33,7 +35,9 @@ export const aboutAppStyles = `
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   width: 100%;
+  height: 100%;
   min-height: 0;
+  overflow: hidden;
 }
 
 .about-topbar {
@@ -56,6 +60,7 @@ export const aboutAppStyles = `
 }
 
 .about-content {
+  min-width: 0;
   min-height: 0;
   overflow-y: auto;
   padding: 1rem;
@@ -65,7 +70,7 @@ export const aboutAppStyles = `
   display: grid;
   gap: 1rem;
   align-content: start;
-  min-height: 100%;
+  min-height: min-content;
 }
 
 .about-card {

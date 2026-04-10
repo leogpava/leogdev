@@ -364,24 +364,26 @@ export function SapApp({ window }: AppComponentProps) {
           </aside>
 
           <main className="sap-content">
-            <SapPageHeader
-              title={activeSectionLabel}
-              description="Experiencia profissional em integracoes SAP, arquitetura enterprise e operacao critica dentro de uma superficie visual alinhada ao Fiori."
-            />
+            <div className="sap-content__inner">
+              <SapPageHeader
+                title={activeSectionLabel}
+                description="Experiencia profissional em integracoes SAP, arquitetura enterprise e operacao critica dentro de uma superficie visual alinhada ao Fiori."
+              />
 
-            {activeSection === "overview" && <SapOverviewSection />}
-            {activeSection === "experience" && <SapExperienceSection />}
-            {activeSection === "projects" &&
-              (selectedProjectId ? (
-                <SapProjectDetail
-                  projectId={selectedProjectId}
-                  onBack={() => setSelectedProjectId(null)}
-                />
-              ) : (
-                <SapProjectsSectionContent onOpenProject={setSelectedProjectId} />
-              ))}
-            {activeSection === "stack" && <SapStackSection />}
-            {activeSection === "architecture" && <SapArchitectureSection />}
+              {activeSection === "overview" && <SapOverviewSection />}
+              {activeSection === "experience" && <SapExperienceSection />}
+              {activeSection === "projects" &&
+                (selectedProjectId ? (
+                  <SapProjectDetail
+                    projectId={selectedProjectId}
+                    onBack={() => setSelectedProjectId(null)}
+                  />
+                ) : (
+                  <SapProjectsSectionContent onOpenProject={setSelectedProjectId} />
+                ))}
+              {activeSection === "stack" && <SapStackSection />}
+              {activeSection === "architecture" && <SapArchitectureSection />}
+            </div>
           </main>
         </div>
       </div>

@@ -8,15 +8,28 @@ import type { AppIsolationMode } from "@/shared/types/app";
 const BASE_SHADOW_STYLES = `
 :host {
   all: initial;
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  min-height: 0;
+  overflow: hidden;
   contain: layout style paint;
 }
 
 [data-isolated-app-root] {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+[data-isolated-app-root] > * {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 *, *::before, *::after {
@@ -46,7 +59,7 @@ export function IsolatedAppContainer({
     return <ShadowAppContainer styleText={styleText}>{children}</ShadowAppContainer>;
   }
 
-  return <div className="h-full">{children}</div>;
+  return <div className="flex h-full min-h-0 w-full flex-col overflow-hidden">{children}</div>;
 }
 
 type ShadowAppContainerProps = {
@@ -102,7 +115,7 @@ function ShadowAppContainer({ styleText, children }: ShadowAppContainerProps) {
   }, [shadowRoot, styleText]);
 
   return (
-    <div ref={hostRef} className="h-full w-full overflow-hidden">
+    <div ref={hostRef} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
       {portalRoot ? createPortal(children, portalRoot) : null}
     </div>
   );

@@ -35,7 +35,7 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
 
   const shouldUseFullscreen = shouldUseMobileFullscreen || window.isMaximized;
   const shouldUseDesktopMaximized = window.isMaximized && !isMobile;
-  const isHidden = (window.isMinimized && !window.isClosing) || (isMobile && !isActive);
+  const isHidden = window.isClosing || (isMobile && !isActive);
   const { handlePointerDown, handlePointerMove, handlePointerUp } = useWindowDrag({
     isMobile,
     window,
@@ -80,7 +80,7 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
               }
       }
     >
-      <div className="flex h-full flex-col">
+      <div className="flex h-full min-h-0 flex-col overflow-hidden">
         <WindowHeader
           title={window.title}
           subtitle={`${definition.id} / ${definition.isolation}`}
@@ -93,7 +93,7 @@ export function WindowFrame({ window, isMobile }: WindowFrameProps) {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
         />
-        <div className="min-h-0 flex-1">
+        <div className="min-h-0 flex-1 overflow-hidden">
           <IsolatedAppContainer
             isolation={definition.isolation}
             styleText={definition.isolatedStyleText}
